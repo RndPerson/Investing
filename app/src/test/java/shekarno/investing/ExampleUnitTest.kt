@@ -2,8 +2,6 @@ package shekarno.investing
 
 import org.junit.Test
 
-import org.junit.Assert.*
-
 /**
  * Example local unit test, which will execute on the development machine (host).
  *
@@ -11,9 +9,9 @@ import org.junit.Assert.*
  */
 class ExampleUnitTest {
 
-    val paper1 = MyDataClass ("Apple", 100)
-    val paper2 = MyDataClass ("Microsoft", 55)
-    val paper3 = MyDataClass ("Facebook", 70)
+    val paper1 = MyDataClass ("Apple", 100, true)
+    val paper2 = MyDataClass ("Microsoft", 55, false)
+    val paper3 = MyDataClass ("Facebook", 70, true)
 
 
     val collection = listOf(paper1,paper2,paper3)
@@ -22,8 +20,8 @@ class ExampleUnitTest {
     print(collection.sort())
     }
 
-    private fun List<MyDataClass>.sort(): List<MyDataClass> {
-    return collection.sortedWith(compareBy(MyDataClass::name, MyDataClass::price))
+    fun List<MyDataClass>.sort(): List<MyDataClass> {
+        return collection.sortedWith(compareBy(MyDataClass::name, MyDataClass::price))
     }
 
 }

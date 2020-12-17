@@ -33,32 +33,5 @@ class InvestMarketFragment : Fragment(R.layout.fragment_invest_market) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        btnGoToPortfolio.setOnClickListener {
-            requireFragmentManager().beginTransaction()
-                .replace(R.id.container, InvestPortfolioFragment())
-                .addToBackStack("InvestPortfolioFragment")
-                .commit()
         }
     }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment InvestMarketFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            InvestMarketFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
-}

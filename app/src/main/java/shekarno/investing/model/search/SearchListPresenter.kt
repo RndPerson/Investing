@@ -16,7 +16,7 @@ class SearchListPresenter : MvpPresenter<SearchListView>() {
         this.selectedCurrency = selectedCurrency
     }
 
-    fun validate(costFrom: String, costTo: String, yearFrom: String, yearTo: String) {
+    fun validateAndSaveData(costFrom: String, costTo: String, yearFrom: String, yearTo: String) {
         when {
             !costIsCorrect(costFrom) -> viewState.showCostFromError()
             !costIsCorrect(costTo) -> viewState.showCostToError()

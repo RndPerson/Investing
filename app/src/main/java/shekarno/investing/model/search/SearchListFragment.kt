@@ -36,7 +36,7 @@ class SearchListFragment : Fragment(R.layout.fragment_search_list), SearchListVi
         }
 
         btnSearch.setOnClickListener {
-            presenter.validate(
+            presenter.validateAndSaveData(
                 etCostFrom.text.toString(),
                 etCostTo.text.toString(),
                 etYearFrom.text.toString(),

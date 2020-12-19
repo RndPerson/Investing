@@ -2,6 +2,7 @@ package shekarno.investing
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import shekarno.investing.model.portfolio.InvestPortfolioFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -11,7 +12,9 @@ class MainActivity : AppCompatActivity() {
         val fragmentManager = supportFragmentManager
 
         fragmentManager.beginTransaction()
-            .add(R.id.container,InvestPortfolioFragment())
+            .add(R.id.container,
+                InvestPortfolioFragment()
+            )
             .commit()
         }
     }

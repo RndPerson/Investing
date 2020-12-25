@@ -7,13 +7,14 @@ import kotlinx.android.synthetic.main.fragment_invest_portfolio.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import shekarno.investing.Equity
-import shekarno.investing.InvestMarketFragment
+import shekarno.investing.model.market.InvestMarketFragment
 import shekarno.investing.R
 import shekarno.investing.model.search.SearchListFragment
 
-class InvestPortfolioFragment : MvpAppCompatFragment(R.layout.fragment_invest_portfolio), InvestPortfolioView {
+class InvestPortfolioFragment : MvpAppCompatFragment(R.layout.fragment_invest_portfolio),
+    InvestPortfolioView {
 
-    private val presenter : InvestPortfolioPresenter by moxyPresenter {
+    private val presenter: InvestPortfolioPresenter by moxyPresenter {
         InvestPortfolioPresenter()
     }
 
@@ -23,12 +24,12 @@ class InvestPortfolioFragment : MvpAppCompatFragment(R.layout.fragment_invest_po
         super.onViewCreated(view, savedInstanceState)
 
         with(rvInvestPortfolio) {
-        layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL, false)
-        adapter = InvestPortfolioAdapter(onEquityClick = { equity ->
-            presenter.onEquityClick(equity)
-        }).also {
-            equitiesAdapter = it
-        }
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            adapter = InvestPortfolioAdapter(onEquityClick = { equity ->
+                presenter.onEquityClick(equity)
+            }).also {
+                equitiesAdapter = it
+            }
         }
 
         btnGoToSearch.setOnClickListener {
@@ -53,7 +54,10 @@ class InvestPortfolioFragment : MvpAppCompatFragment(R.layout.fragment_invest_po
 
     override fun openInvestMarket(equity: Equity) {
         requireFragmentManager().beginTransaction()
-            .replace(R.id.container, InvestMarketFragment())
+            .replace(
+                R.id.container,
+                InvestMarketFragment.newInstance(equity)
+            )
             .addToBackStack("InvestMarketFragment")
             .commit()
     }

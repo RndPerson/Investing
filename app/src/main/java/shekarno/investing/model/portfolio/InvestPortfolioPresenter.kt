@@ -17,12 +17,7 @@ class InvestPortfolioPresenter : MvpPresenter<InvestPortfolioView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        viewState.setEquities(equities)
-        /* куда добавить фильтр? equities = equities.filter {equity.quantity != "0"}
-            пытаюсь его засунуть сюда, добавив во входные параметры equity: Equity
-            компилятор ругается на override
-            фильтр нужен для того, чтобы акция с количеством 0 не отображалась в портфеле
-            */
+        viewState.setEquities(equities.filter { it.quantity != "0" })
     }
 
     fun onEquityClick(equity: Equity) {

@@ -6,11 +6,12 @@ import android.view.View
 import android.widget.RadioGroup
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_search_list.*
+import moxy.MvpAppCompatFragment
 import shekarno.investing.R
 
 enum class CURRENCY { RUBLE, DOLLAR, EURO, ANY }
 
-class SearchListFragment : Fragment(R.layout.fragment_search_list), SearchListView {
+class SearchListFragment : MvpAppCompatFragment(R.layout.fragment_search_list), SearchListView {
 
     private val presenter = SearchListPresenter()
 

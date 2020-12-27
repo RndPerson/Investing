@@ -5,13 +5,12 @@ import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
 import shekarno.investing.Equity
 
-interface InvestMarketView : MvpView {
+interface MarketView : MvpView {
 
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun setEquity(equity: Equity)
 
     @StateStrategyType(AddToEndSingleStrategy::class)
-    fun setIsInPortfolio(inPortfolio: Boolean)
-
+    fun setIsInFavourite(inFavourite: Boolean)
 
 }

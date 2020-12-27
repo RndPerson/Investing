@@ -2,37 +2,34 @@ package shekarno.investing.model.market
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
-import kotlinx.android.synthetic.main.fragment_invest_market.*
-import kotlinx.android.synthetic.main.fragment_invest_portfolio.*
-import kotlinx.android.synthetic.main.invest_portfolio_item.*
+import kotlinx.android.synthetic.main.fragment_market.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import shekarno.investing.Equity
 import shekarno.investing.R
-import shekarno.investing.data.PortfolioDAOImpl
+import shekarno.investing.data.FavouriteDAOImpl
 import shekarno.investing.model.search.SearchListFragment
 
-class InvestMarketFragment : MvpAppCompatFragment(R.layout.fragment_invest_market),
-    InvestMarketView {
+class MarketFragment : MvpAppCompatFragment(R.layout.fragment_market),
+    MarketView {
 
     companion object {
 
         private const val EQUITY = "EQUITY"
 
         fun newInstance(equity: Equity) =
-            InvestMarketFragment().apply {
+            MarketFragment().apply {
                 arguments = Bundle().apply {
                     putParcelable(EQUITY, equity)
                 }
             }
     }
 
-    private val presenter: InvestMarketPresenter by moxyPresenter {
-        InvestMarketPresenter(
+    private val presenter: MarketPresenter by moxyPresenter {
+        MarketPresenter(
             equity = arguments?.getParcelable(EQUITY)!!,
-            portfolioDao = PortfolioDAOImpl(
+            favouriteDao = FavouriteDAOImpl(
                 requireContext().getSharedPreferences("data", Context.MODE_PRIVATE)
             )
         )
@@ -40,8 +37,8 @@ class InvestMarketFragment : MvpAppCompatFragment(R.layout.fragment_invest_marke
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        investMarketFavorite.setOnClickListener {
-            presenter.onBuyClicked()
+        isFavourite.setOnClickListener {
+            presenter.onFavouriteClicked()
         }
     }
 
@@ -50,9 +47,9 @@ class InvestMarketFragment : MvpAppCompatFragment(R.layout.fragment_invest_marke
         tvQuantity.text = equity.quantity
     }
 
-    override fun setIsInPortfolio(inPortfolio: Boolean) {
-        investMarketFavorite.setImageResource(
-            if (inPortfolio) R.drawable.ic_baseline_star_24 else R.drawable.ic_baseline_star_border_24
+    override fun setIsInFavourite(inFavourite: Boolean) {
+        isFavourite.setImageResource(
+            if (inFavourite) R.drawable.ic_baseline_star_24 else R.drawable.ic_baseline_star_border_24
         )
     }
 

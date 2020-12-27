@@ -3,29 +3,29 @@ package shekarno.investing.model.portfolio
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.fragment_invest_portfolio.*
+import kotlinx.android.synthetic.main.fragment_portfolio.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import shekarno.investing.Equity
-import shekarno.investing.model.market.InvestMarketFragment
+import shekarno.investing.model.market.MarketFragment
 import shekarno.investing.R
 import shekarno.investing.model.search.SearchListFragment
 
-class InvestPortfolioFragment : MvpAppCompatFragment(R.layout.fragment_invest_portfolio),
-    InvestPortfolioView {
+class PortfolioFragment : MvpAppCompatFragment(R.layout.fragment_portfolio),
+    PortfolioView {
 
-    private val presenter: InvestPortfolioPresenter by moxyPresenter {
-        InvestPortfolioPresenter()
+    private val presenter: PortfolioPresenter by moxyPresenter {
+        PortfolioPresenter()
     }
 
-    private var equitiesAdapter: InvestPortfolioAdapter? = null
+    private var equitiesAdapter: PortfolioAdapter? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        with(rvInvestPortfolio) {
+        with(rvPortfolio) {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            adapter = InvestPortfolioAdapter(onEquityClick = { equity ->
+            adapter = PortfolioAdapter(onEquityClick = { equity ->
                 presenter.onEquityClick(equity)
             }).also {
                 equitiesAdapter = it
@@ -36,7 +36,7 @@ class InvestPortfolioFragment : MvpAppCompatFragment(R.layout.fragment_invest_po
             requireFragmentManager().beginTransaction()
                 .replace(
                     R.id.container,
-                    SearchListFragment()
+                    MarketFragment()
                 )
                 .addToBackStack("SearchListFragment")
                 .commit()
@@ -52,13 +52,13 @@ class InvestPortfolioFragment : MvpAppCompatFragment(R.layout.fragment_invest_po
         equitiesAdapter?.submitList(equities)
     }
 
-    override fun openInvestMarket(equity: Equity) {
+    override fun openMarket(equity: Equity) {
         requireFragmentManager().beginTransaction()
             .replace(
                 R.id.container,
-                InvestMarketFragment.newInstance(equity)
+                MarketFragment.newInstance(equity)
             )
-            .addToBackStack("InvestMarketFragment")
+            .addToBackStack("MarketFragment")
             .commit()
     }
 }

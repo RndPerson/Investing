@@ -7,12 +7,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.invest_portfolio_item.*
+import kotlinx.android.synthetic.main.portfolio_item.*
 import shekarno.investing.Equity
 import shekarno.investing.R
 
-class InvestPortfolioAdapter(private val onEquityClick: (Equity) -> Unit) :
-    ListAdapter<Equity, InvestPortfolioAdapter.ViewHolder>(object : DiffUtil.ItemCallback<Equity>() {
+class PortfolioAdapter(private val onEquityClick: (Equity) -> Unit) :
+    ListAdapter<Equity, PortfolioAdapter.ViewHolder>(object : DiffUtil.ItemCallback<Equity>() {
 
         override fun areItemsTheSame(oldItem: Equity, newItem: Equity): Boolean {
             return oldItem.name == newItem.name
@@ -28,7 +28,7 @@ class InvestPortfolioAdapter(private val onEquityClick: (Equity) -> Unit) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.invest_portfolio_item, parent, false)
+                .inflate(R.layout.portfolio_item, parent, false)
         )
     }
 

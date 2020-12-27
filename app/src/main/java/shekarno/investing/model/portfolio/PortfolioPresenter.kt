@@ -3,7 +3,7 @@ package shekarno.investing.model.portfolio
 import moxy.MvpPresenter
 import shekarno.investing.Equity
 
-class InvestPortfolioPresenter : MvpPresenter<InvestPortfolioView>() {
+class PortfolioPresenter : MvpPresenter<PortfolioView>() {
 
     private var equities = listOf<Equity>(
         Equity("Apple", "2"),
@@ -21,6 +21,8 @@ class InvestPortfolioPresenter : MvpPresenter<InvestPortfolioView>() {
     }
 
     fun onEquityClick(equity: Equity) {
-        viewState.openInvestMarket(equity)
+        viewState.openMarket(equity)
     }
+
+
 }

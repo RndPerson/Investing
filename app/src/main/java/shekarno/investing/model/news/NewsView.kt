@@ -1,19 +1,17 @@
-package shekarno.investing.model.search
+package shekarno.investing.model.news
 
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.OneExecutionStateStrategy
 import moxy.viewstate.strategy.StateStrategyType
-import moxy.viewstate.strategy.alias.AddToEnd
-import shekarno.investing.Equity
+import shekarno.investing.News
 
-
-interface SearchListView : MvpView {
+interface NewsView : MvpView {
 
     @StateStrategyType(AddToEndSingleStrategy::class)
-    fun setEquities(equities: List<Equity>)
+    fun setNews(news: List<News>)
 
     @StateStrategyType(OneExecutionStateStrategy::class)
-    fun openMarket(equity: Equity)
+    fun openNews(news: News)
 
 }

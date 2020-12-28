@@ -1,4 +1,4 @@
-package shekarno.investing.model.portfolio
+package shekarno.investing.model.news
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,20 +6,20 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import kotlinx.android.extensions.LayoutContainer
+import kotlinx.android.synthetic.main.news_item.*
 import kotlinx.android.synthetic.main.portfolio_item.*
-import shekarno.investing.Equity
+import shekarno.investing.News
 import shekarno.investing.R
 
-class PortfolioAdapter(private val onEquityClick: (Equity) -> Unit) :
-    ListAdapter<Equity, PortfolioAdapter.ViewHolder>(object : DiffUtil.ItemCallback<Equity>() {
+class NewsAdapter(private val onNewsClick: (News) -> Unit) :
+    ListAdapter<News, NewsAdapter.ViewHolder>(object : DiffUtil.ItemCallback<News>() {
 
-        override fun areItemsTheSame(oldItem: Equity, newItem: Equity): Boolean {
-            return oldItem.name == newItem.name
+        override fun areItemsTheSame(oldItem: News, newItem: News): Boolean {
+            return oldItem.url == newItem.url
         }
 
-        override fun areContentsTheSame(oldItem: Equity, newItem: Equity): Boolean {
+        override fun areContentsTheSame(oldItem: News, newItem: News): Boolean {
             return oldItem == newItem
         }
 
@@ -29,17 +29,16 @@ class PortfolioAdapter(private val onEquityClick: (Equity) -> Unit) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.portfolio_item, parent, false)
+                .inflate(R.layout.news_item, parent, false)
         )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.equityName.text = item.name
-        holder.equityPrice.text = item.price
-            Glide.with(holder.imageEquity.context).load("http://static.tinkoff.ru/brands/traiding/${item.isin}x160.png").into(holder.imageEquity)
+        holder.newsTitle.text = item.title
+        holder.newsDescription.text = item.description
         holder.containerView.setOnClickListener {
-            onEquityClick(item)
+            onNewsClick(item)
         }
     }
 

@@ -18,7 +18,7 @@ class FavouritePresenter(
     }
 
     fun onEquityClick(equity: Equity) {
-        viewState.openMarket(equity)
+        viewState.openDetails(equity)
     }
 }
 

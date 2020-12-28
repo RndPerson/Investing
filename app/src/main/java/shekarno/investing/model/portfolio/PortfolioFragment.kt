@@ -7,9 +7,8 @@ import kotlinx.android.synthetic.main.fragment_portfolio.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import shekarno.investing.Equity
-import shekarno.investing.model.market.MarketFragment
 import shekarno.investing.R
-import shekarno.investing.model.search.SearchListFragment
+import shekarno.investing.model.details.DetailsFragment
 
 class PortfolioFragment : MvpAppCompatFragment(R.layout.fragment_portfolio),
     PortfolioView {
@@ -42,13 +41,13 @@ class PortfolioFragment : MvpAppCompatFragment(R.layout.fragment_portfolio),
         equitiesAdapter?.submitList(equities)
     }
 
-    override fun openMarket(equity: Equity) {
+    override fun openDetails(equity: Equity) {
         requireFragmentManager().beginTransaction()
             .replace(
                 R.id.container,
-                MarketFragment.newInstance(equity)
+                DetailsFragment.newInstance(equity)
             )
-            .addToBackStack("MarketFragment")
+            .addToBackStack("DetailsFragment")
             .commit()
     }
 }

@@ -12,6 +12,6 @@ interface FavouriteView : MvpView {
     fun setEquities(equities: List<Equity>)
 
     @StateStrategyType(OneExecutionStateStrategy::class)
-    fun openMarket(equity: Equity)
+    fun openDetails(equity: Equity)
 
 }

@@ -10,7 +10,7 @@ import moxy.ktx.moxyPresenter
 import shekarno.investing.Equity
 import shekarno.investing.R
 import shekarno.investing.data.FavouriteDAOImpl
-import shekarno.investing.model.market.MarketFragment
+import shekarno.investing.model.details.DetailsFragment
 import shekarno.investing.model.portfolio.PortfolioAdapter
 
 class FavouriteFragment : MvpAppCompatFragment(R.layout.fragment_favourite), FavouriteView {
@@ -45,13 +45,13 @@ class FavouriteFragment : MvpAppCompatFragment(R.layout.fragment_favourite), Fav
         favouritesAdapter?.submitList(equities)
     }
 
-    override fun openMarket(equity: Equity) {
+    override fun openDetails(equity: Equity) {
         requireFragmentManager().beginTransaction()
             .replace(
                 R.id.container,
-                MarketFragment.newInstance(equity)
+                DetailsFragment.newInstance(equity)
             )
-            .addToBackStack("MarketFragment")
+            .addToBackStack("DetailsFragment")
             .commit()
     }
 }

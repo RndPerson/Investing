@@ -6,4 +6,4 @@ import kotlinx.serialization.Serializable
 
 @Parcelize
 @Serializable
-data class Equity(val name: String, val price: String, val isin: String) : Parcelable
+data class News(val title: String, val description: String, val image: String, val url: String, val date: String) : Parcelable

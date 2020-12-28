@@ -1,13 +1,13 @@
-package shekarno.investing.model.market
+package shekarno.investing.model.details
 
 import moxy.MvpPresenter
 import shekarno.investing.Equity
 import shekarno.investing.data.FavouriteDAO
 
-class MarketPresenter(
+class  DetailsPresenter(
     private val equity: Equity,
     private val favouriteDao: FavouriteDAO
-) : MvpPresenter<MarketView>() {
+) : MvpPresenter<DetailsView>() {
 
     private var isInFavourite: Boolean = false
 
@@ -27,4 +27,5 @@ class MarketPresenter(
         isInFavourite = !isInFavourite
         viewState.setIsInFavourite(isInFavourite)
     }
+
 }

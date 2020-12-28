@@ -5,8 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_main.*
 import shekarno.investing.model.favourite.FavouriteFragment
+import shekarno.investing.model.news.NewsFragment
 import shekarno.investing.model.portfolio.PortfolioFragment
-import shekarno.investing.model.search.SearchListFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,14 +16,14 @@ class MainActivity : AppCompatActivity() {
         val portfolioFragment = PortfolioFragment()
         val favouriteFragment =
             FavouriteFragment()
-        val searchListFragment = SearchListFragment()
+        val newsFragment = NewsFragment()
 
         makeCurrentFragment(portfolioFragment)
 
         bottom_navigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.portfolio -> makeCurrentFragment(portfolioFragment)
-                R.id.search -> makeCurrentFragment(searchListFragment)
+                R.id.news -> makeCurrentFragment(newsFragment)
                 R.id.favourite -> makeCurrentFragment(favouriteFragment)
 
             }

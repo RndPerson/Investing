@@ -12,6 +12,14 @@ class PortfolioPresenter : MvpPresenter<PortfolioView>() {
         Equity("Microsoft", "4"),
         Equity("Twitter", "7"),
         Equity("Ford", "0"),
+        Equity("Fosfrd", "0"),
+        Equity("Fasvord", "2"),
+        Equity("Forczxcd", "5"),
+        Equity("Foasdard", "3"),
+        Equity("Fohgrd", "1"),
+        Equity("Forhrfdghd", "1"),
+        Equity("Foaewrd", "2"),
+        Equity("Foxzcrd", "7"),
         Equity("Google", "2")
     )
 

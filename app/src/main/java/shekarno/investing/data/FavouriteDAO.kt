@@ -2,7 +2,7 @@ package shekarno.investing.data
 
 import shekarno.investing.Equity
 
-interface PortfolioDAO {
+interface FavouriteDAO {
 
     /**
      * добавление [equity] в портфель
@@ -23,6 +23,6 @@ interface PortfolioDAO {
     /**
      * @return true если акция в портфолио, иначе false
      */
-    fun isInPortfolio(equity: Equity): Boolean
+    fun isInFavourite(equity: Equity): Boolean
 }
 

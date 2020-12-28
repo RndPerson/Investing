@@ -1,45 +1,48 @@
-package shekarno.investing.model.portfolio
+package shekarno.investing.model.favourite
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.fragment_portfolio.*
+import kotlinx.android.synthetic.main.fragment_favourite.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import shekarno.investing.Equity
-import shekarno.investing.model.market.MarketFragment
 import shekarno.investing.R
-import shekarno.investing.model.search.SearchListFragment
+import shekarno.investing.data.FavouriteDAOImpl
+import shekarno.investing.model.market.MarketFragment
+import shekarno.investing.model.portfolio.PortfolioAdapter
 
-class PortfolioFragment : MvpAppCompatFragment(R.layout.fragment_portfolio),
-    PortfolioView {
+class FavouriteFragment : MvpAppCompatFragment(R.layout.fragment_favourite), FavouriteView {
 
-    private val presenter: PortfolioPresenter by moxyPresenter {
-        PortfolioPresenter()
+    companion object {
+        fun newInstance() = FavouriteFragment()
     }
 
-    private var equitiesAdapter: PortfolioAdapter? = null
+    private val presenter: FavouritePresenter by moxyPresenter {
+        FavouritePresenter(
+            favouriteDAO = FavouriteDAOImpl(
+                requireContext().getSharedPreferences("data", Context.MODE_PRIVATE)
+            )
+        )
+    }
+
+    private var favouritesAdapter: PortfolioAdapter? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        with(rvPortfolio) {
+        with(favouriteList) {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             adapter = PortfolioAdapter(onEquityClick = { equity ->
                 presenter.onEquityClick(equity)
             }).also {
-                equitiesAdapter = it
+                favouritesAdapter = it
             }
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        equitiesAdapter = null
-    }
-
     override fun setEquities(equities: List<Equity>) {
-        equitiesAdapter?.submitList(equities)
+        favouritesAdapter?.submitList(equities)
     }
 
     override fun openMarket(equity: Equity) {
@@ -52,4 +55,3 @@ class PortfolioFragment : MvpAppCompatFragment(R.layout.fragment_portfolio),
             .commit()
     }
 }
-

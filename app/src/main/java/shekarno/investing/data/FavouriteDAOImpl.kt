@@ -6,12 +6,12 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import shekarno.investing.Equity
 
-class  PortfolioDAOImpl(
+class  FavouriteDAOImpl(
     private val sharedPreferences: SharedPreferences
-) : PortfolioDAO {
+) : FavouriteDAO {
 
     private var equities: List<Equity>
-    get() = sharedPreferences.getString(PORTFOLIO_DAO_KEY, null)?.let {
+    get() = sharedPreferences.getString(FAVOURITE_DAO_KEY, null)?.let {
         try {
             Json.decodeFromString<List<Equity>>(it)
         } catch (t: Throwable) {
@@ -20,7 +20,7 @@ class  PortfolioDAOImpl(
     } ?: emptyList()
     set(value) {
         sharedPreferences.edit().putString(
-            PORTFOLIO_DAO_KEY,
+            FAVOURITE_DAO_KEY,
             Json.encodeToString(value)
             ).apply()
     }
@@ -35,11 +35,11 @@ class  PortfolioDAOImpl(
 
     override fun getAll(): List<Equity> = equities
 
-    override fun isInPortfolio(equity: Equity): Boolean = equities.contains(equity)
+    override fun isInFavourite(equity: Equity): Boolean = equities.contains(equity)
 
     companion object {
 
-        private  const val PORTFOLIO_DAO_KEY = "PORTFOLIO_DAO_KEY"
+        private  const val FAVOURITE_DAO_KEY = "FAVOURITE_DAO_KEY"
     }
 
 }

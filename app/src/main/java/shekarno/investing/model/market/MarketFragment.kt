@@ -40,6 +40,22 @@ class MarketFragment : MvpAppCompatFragment(R.layout.fragment_market),
         isFavourite.setOnClickListener {
             presenter.onFavouriteClicked()
         }
+        btnBuy.setOnClickListener {
+            val plusQuantityToString = etSetQuantity.text.toString()
+            val quantityToString = tvQuantity.text.toString()
+            var count: Int = Integer.parseInt(quantityToString)
+            val change: Int = Integer.parseInt(plusQuantityToString)
+            count = count + change
+            tvQuantity.text = count.toString()
+        }
+        btnSell.setOnClickListener {
+            val minusQuantityToString = etSetQuantity.text.toString()
+            val quantityToString = tvQuantity.text.toString()
+            var count: Int = Integer.parseInt(quantityToString)
+            val change: Int = Integer.parseInt(minusQuantityToString)
+            count = count - change
+            tvQuantity.text = count.toString()
+        }
     }
 
     override fun setEquity(equity: Equity) {
@@ -52,6 +68,4 @@ class MarketFragment : MvpAppCompatFragment(R.layout.fragment_market),
             if (inFavourite) R.drawable.ic_baseline_star_24 else R.drawable.ic_baseline_star_border_24
         )
     }
-
-
 }

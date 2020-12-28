@@ -27,5 +27,4 @@ class MarketPresenter(
         isInFavourite = !isInFavourite
         viewState.setIsInFavourite(isInFavourite)
     }
-
 }
